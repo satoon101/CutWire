@@ -46,8 +46,8 @@ config_strings = LangStrings(info.basename + '/config_strings')
 _colors = ('Blue', 'Yellow', 'Red', 'Green')
 
 # Store the defused/exploded messages
-defused_message = SayText2(wire_strings['Defused'])
-exploded_message = SayText2(wire_strings['Exploded'])
+defused_message = SayText2(message=wire_strings['Defused'])
+exploded_message = SayText2(message=wire_strings['Exploded'])
 
 
 # =============================================================================
@@ -96,7 +96,7 @@ def bomb_begindefuse(game_event):
         if (bot_setting == 1 and gonna_blow) or bot_setting == 2:
 
             # Cut a wire
-            cut_chosen_wire(choice(_colors), player.name)
+            cut_chosen_wire(choice(_colors), player)
 
         # No need to go further
         return
@@ -138,7 +138,7 @@ def bomb_exploded(game_event):
 # =============================================================================
 def bomb_choice(menu, index, option):
     """Cut the chosen wire."""
-    cut_chosen_wire(option.value, PlayerEntity(index).name)
+    cut_chosen_wire(option.value, PlayerEntity(index))
 
 
 # =============================================================================
@@ -164,7 +164,7 @@ def get_bomb_entity():
         return entity
 
 
-def cut_chosen_wire(chosen_wire, name):
+def cut_chosen_wire(chosen_wire, player):
     """Cut a wire to defuse or explode the bomb."""
     # Get the bomb's instance
     bomb = get_bomb_entity()
@@ -177,7 +177,8 @@ def cut_chosen_wire(chosen_wire, name):
         bomb.defuse_count_down = 1.0
 
         # Tell the server that the player cut the correct wire
-        defused_message.tokens = {'name': name}
+        defused_message.tokens = {'name': player.name}
+        defused_message.index = player.index
         defused_message.send()
 
     # Did the defuser choose one of the wrong wires?
@@ -188,5 +189,6 @@ def cut_chosen_wire(chosen_wire, name):
         bomb.c4_blow = 1.0
 
         # Tell the server that the player cut the wrong wire
-        exploded_message.tokens = {'name': name}
+        exploded_message.tokens = {'name': player.name}
+        exploded_message.index = player.index
         exploded_message.send()

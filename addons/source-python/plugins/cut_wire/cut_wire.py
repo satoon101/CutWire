@@ -21,7 +21,8 @@ from filters.entities import EntityIter
 #   Menus
 from menus import PagedMenu
 from menus import PagedOption
-from menus import Text
+#   Messages
+from messages import SayText2
 #   Players
 from players.entity import PlayerEntity
 from players.helpers import index_from_userid
@@ -43,6 +44,10 @@ config_strings = LangStrings(info.basename + '/config_strings')
 
 # Store the wire color choices
 _colors = ('Blue', 'Yellow', 'Red', 'Green')
+
+# Store the defused/exploded messages
+defused_message = SayText2(wire_strings['Defused'])
+exploded_message = SayText2(wire_strings['Exploded'])
 
 
 # =============================================================================
@@ -76,8 +81,7 @@ def bomb_begindefuse(game_event):
     player = PlayerEntity(index_from_userid(game_event.get_int('userid')))
 
     # Get the bomb's instance
-    for bomb in EntityIter('planted_c4', return_types='entity'):
-        break
+    bomb = get_bomb_entity()
 
     # Get whether the defuser has time to defuse
     gonna_blow = bomb.defuse_length > bomb.timer_length
@@ -92,7 +96,7 @@ def bomb_begindefuse(game_event):
         if (bot_setting == 1 and gonna_blow) or bot_setting == 2:
 
             # Cut a wire
-            cut_chosen_wire(choice(_colors))
+            cut_chosen_wire(choice(_colors), player.name)
 
         # No need to go further
         return
@@ -104,8 +108,8 @@ def bomb_begindefuse(game_event):
     has_kit = game_event.get_bool('haskit')
 
     # Should the wire cut menu be sent to the defuser?
-    if (send_setting == 1 or (send_setting == 2 and gonna_blow)
-            or (send_setting == 3 and (gonna_blow or not has_kit))):
+    if (send_setting == 1 or (send_setting == 2 and gonna_blow) or
+            (send_setting == 3 and (gonna_blow or not has_kit))):
 
         # Send the wire cut menu to the defuser
         wire_menu.send(player.index)
@@ -114,6 +118,18 @@ def bomb_begindefuse(game_event):
 @Event
 def bomb_abortdefuse(game_event):
     """Close the menu for the defuser."""
+    wire_menu.close(game_event.get_int('userid'))
+
+
+@Event
+def bomb_defused(game_event):
+    """Close the menu for the defuser."""
+    wire_menu.close(game_event.get_int('userid'))
+
+
+@Event
+def bomb_exploded(game_event):
+    """Close the menu for any defusers."""
     wire_menu.close()
 
 
@@ -122,7 +138,7 @@ def bomb_abortdefuse(game_event):
 # =============================================================================
 def bomb_choice(menu, index, option):
     """Cut the chosen wire."""
-    cut_chosen_wire(option.value)
+    cut_chosen_wire(option.value, PlayerEntity(index).name)
 
 
 # =============================================================================
@@ -142,20 +158,35 @@ for _color in _colors:
 # =============================================================================
 # >> HELPER FUNCTIONS
 # =============================================================================
-def cut_chosen_wire(chosen_wire):
+def get_bomb_entity():
+    """Return the bomb's BaseEntity instance."""
+    for entity in EntityIter('planted_c4', return_types='entity'):
+        return entity
+
+
+def cut_chosen_wire(chosen_wire, name):
     """Cut a wire to defuse or explode the bomb."""
     # Get the bomb's instance
-    for bomb in EntityIter('planted_c4', return_types='entity'):
-        break
+    bomb = get_bomb_entity()
 
     # Did the defuser choose the correct wire?
     if chosen_wire == choice(_colors):
 
         # Defuse the bomb
-        bomb.defuse_count_down = 0.0
+        bomb.c4_blow += 1.0
+        bomb.defuse_count_down = 1.0
+
+        # Tell the server that the player cut the correct wire
+        defused_message.tokens = {'name': name}
+        defused_message.send()
 
     # Did the defuser choose one of the wrong wires?
     else:
 
         # Explode the bomb
-        bomb.c4_blow = 0.0
+        bomb.defuse_count_down += 1.0
+        bomb.c4_blow = 1.0
+
+        # Tell the server that the player cut the wrong wire
+        exploded_message.tokens = {'name': name}
+        exploded_message.send()

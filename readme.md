@@ -43,20 +43,26 @@ Edit that file to your liking.  The current default configuration file looks lik
 The following are screenshots of the menu and messages that accompany this plugin:
 
 <br>
-**CS:GO Menu**
+**CS:GO Menu:**
+
 ![CSGO Menu](https://raw.githubusercontent.com/satoon101/CutWire/screenshots/screenshots/csgo_menu.png "CS:GO Menu")
 <br>
-**CS:GO cut correct wire**
+**CS:GO cut correct wire:**
+
 ![CSGO Correct](https://raw.githubusercontent.com/satoon101/CutWire/screenshots/screenshots/csgo_correct_wire.png "CS:GO Correct")
 <br>
-**CS:GO cut wrong wire**
+**CS:GO cut wrong wire:**
+
 ![CSGO Wrong](https://raw.githubusercontent.com/satoon101/CutWire/screenshots/screenshots/csgo_wrong_wire.png "CS:GO Wrong")
 <br>
-**CS:S Menu**
+**CS:S Menu:**
+
 ![CSS Menu](https://raw.githubusercontent.com/satoon101/CutWire/screenshots/screenshots/css_menu.png "CS:S Menu")
 <br>
-**CS:S cut correct wire**
+**CS:S cut correct wire:**
+
 ![CSS Correct](https://raw.githubusercontent.com/satoon101/CutWire/screenshots/screenshots/css_correct_wire.png "CS:S Correct")
 <br>
-**CS:S cut wrong wire**
+**CS:S cut wrong wire:**
+
 ![CSS Wrong](https://raw.githubusercontent.com/satoon101/CutWire/screenshots/screenshots/css_wrong_wire.png "CS:S Wrong")

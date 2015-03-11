@@ -18,9 +18,9 @@ from plugins.info import PluginInfo
 info = PluginInfo()
 info.name = 'Cut Wire'
 info.author = 'Satoon101'
-info.version = '1.0'
+info.version = '1.1'
 info.basename = 'cut_wire'
 info.variable = info.basename + '_version'
-info.url = ''
+info.url = 'http://forums.sourcepython.com/showthread.php?779'
 info.convar = PublicConVar(
     info.variable, info.version, 0, info.name + ' Version')

@@ -118,13 +118,13 @@ def bomb_begindefuse(game_event):
 @Event
 def bomb_abortdefuse(game_event):
     """Close the menu for the defuser."""
-    wire_menu.close(game_event.get_int('userid'))
+    wire_menu.close(index_from_userid(game_event.get_int('userid')))
 
 
 @Event
 def bomb_defused(game_event):
     """Close the menu for the defuser."""
-    wire_menu.close(game_event.get_int('userid'))
+    wire_menu.close(index_from_userid(game_event.get_int('userid')))
 
 
 @Event

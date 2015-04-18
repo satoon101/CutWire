@@ -45,29 +45,29 @@ The following are screenshots of the menu and messages that accompany this plugi
 <br>
 **CS:GO Menu:**
 
-![CSGO Menu](https://raw.githubusercontent.com/satoon101/CutWire/screenshots/screenshots/csgo_menu.png "CS:GO Menu")
+![CSGO Menu](https://raw.githubusercontent.com/satoon101/CutWire/screenshots/csgo_menu.png "CS:GO Menu")
 
 <br>
 **CS:GO cut correct wire:**
 
-![CSGO Correct](https://raw.githubusercontent.com/satoon101/CutWire/screenshots/screenshots/csgo_correct_wire.png "CS:GO Correct")
+![CSGO Correct](https://raw.githubusercontent.com/satoon101/CutWire/screenshots/csgo_correct_wire.png "CS:GO Correct")
 
 <br>
 **CS:GO cut wrong wire:**
 
-![CSGO Wrong](https://raw.githubusercontent.com/satoon101/CutWire/screenshots/screenshots/csgo_wrong_wire.png "CS:GO Wrong")
+![CSGO Wrong](https://raw.githubusercontent.com/satoon101/CutWire/screenshots/csgo_wrong_wire.png "CS:GO Wrong")
 
 <br>
 **CS:S Menu:**
 
-![CSS Menu](https://raw.githubusercontent.com/satoon101/CutWire/screenshots/screenshots/css_menu.png "CS:S Menu")
+![CSS Menu](https://raw.githubusercontent.com/satoon101/CutWire/screenshots/css_menu.png "CS:S Menu")
 
 <br>
 **CS:S cut correct wire:**
 
-![CSS Correct](https://raw.githubusercontent.com/satoon101/CutWire/screenshots/screenshots/css_correct_wire.png "CS:S Correct")
+![CSS Correct](https://raw.githubusercontent.com/satoon101/CutWire/screenshots/css_correct_wire.png "CS:S Correct")
 
 <br>
 **CS:S cut wrong wire:**
 
-![CSS Wrong](https://raw.githubusercontent.com/satoon101/CutWire/screenshots/screenshots/css_wrong_wire.png "CS:S Wrong")
+![CSS Wrong](https://raw.githubusercontent.com/satoon101/CutWire/screenshots/css_wrong_wire.png "CS:S Wrong")

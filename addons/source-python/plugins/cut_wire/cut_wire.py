@@ -74,8 +74,8 @@ with ConfigManager(info.basename) as config:
 # =============================================================================
 # >> GAME EVENTS
 # =============================================================================
-@Event
-def bomb_begindefuse(game_event):
+@Event('bomb_begindefuse')
+def begin_defuse(game_event):
     """Send a menu to the defuser."""
     # Get the defuser
     player = PlayerEntity(index_from_userid(game_event.get_int('userid')))
@@ -115,20 +115,14 @@ def bomb_begindefuse(game_event):
         wire_menu.send(player.index)
 
 
-@Event
-def bomb_abortdefuse(game_event):
+@Event('bomb_defused', 'bomb_abortdefuse')
+def close_menu(game_event):
     """Close the menu for the defuser."""
     wire_menu.close(index_from_userid(game_event.get_int('userid')))
 
 
-@Event
-def bomb_defused(game_event):
-    """Close the menu for the defuser."""
-    wire_menu.close(index_from_userid(game_event.get_int('userid')))
-
-
-@Event
-def bomb_exploded(game_event):
+@Event('bomb_exploded')
+def close_menu_all(game_event):
     """Close the menu for any defusers."""
     wire_menu.close()
 

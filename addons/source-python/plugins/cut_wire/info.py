@@ -18,7 +18,7 @@ from plugins.info import PluginInfo
 info = PluginInfo()
 info.name = 'Cut Wire'
 info.author = 'Satoon101'
-info.version = '1.2'
+info.version = '1.2a'
 info.basename = 'cut_wire'
 info.variable = info.basename + '_version'
 info.url = 'http://forums.sourcepython.com/showthread.php?779'

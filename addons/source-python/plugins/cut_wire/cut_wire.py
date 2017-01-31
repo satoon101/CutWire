@@ -5,29 +5,21 @@
 # =============================================================================
 # >> IMPORTS
 # =============================================================================
-# Python Imports
-#   Random
+# Python
 from random import choice
 
-# Source.Python Imports
-#   Config
+# Source.Python
 from config.manager import ConfigManager
-#   Entities
 from entities.entity import Entity
-#   Events
 from events import Event
-#   Menus
 from menus import PagedMenu
 from menus import PagedOption
-#   Messages
 from messages import SayText2
-#   Players
 from players.entity import Player
 from players.helpers import index_from_userid
-#   Translations
 from translations.strings import LangStrings
 
-# Script Imports
+# Plugin
 from cut_wire.info import info
 
 
@@ -35,10 +27,10 @@ from cut_wire.info import info
 # >> GLOBAL VARIABLES
 # =============================================================================
 # Get the in-game strings to use
-wire_strings = LangStrings(info.basename + '/strings')
+wire_strings = LangStrings(info.name + '/strings')
 
 # Get the config strings to use
-config_strings = LangStrings(info.basename + '/config_strings')
+config_strings = LangStrings(info.name + '/config_strings')
 
 # Store the wire color choices
 _wire_colors = tuple(x for x in wire_strings if x.startswith('Color:'))
@@ -52,7 +44,7 @@ exploded_message = SayText2(message=wire_strings['Exploded'])
 # >> CONFIGURATION
 # =============================================================================
 # Create the config file
-with ConfigManager(info.basename) as config:
+with ConfigManager(info.name) as config:
 
     # Create the send menu convar
     send_menu = config.cvar('cw_send_menu', 1, config_strings['SendMenu'])
@@ -75,7 +67,7 @@ with ConfigManager(info.basename) as config:
 def begin_defuse(game_event):
     """Send a menu to the defuser."""
     # Get the defuser
-    player = Player(index_from_userid(game_event['userid']))
+    player = Player.from_userid(game_event['userid'])
 
     # Get the bomb's instance
     bomb = Entity.find('planted_c4')

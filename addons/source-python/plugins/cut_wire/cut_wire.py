@@ -93,13 +93,12 @@ def begin_defuse(game_event):
     # Get the send menu convar's value
     send_setting = send_menu.get_int()
 
-    # Should the wire cut menu be sent to the defuser?
-    if (send_setting == 1 or
-            (send_setting == 2 and gonna_blow) or
-            (send_setting == 3 and (gonna_blow or not game_event['haskit']))):
-
-        # Send the wire cut menu to the defuser
-        wire_menu.send(player.index)
+    # Send the wire cut menu to the defuser
+    if send_setting == 2 and not gonna_blow:
+        return
+    if send_setting == 3 and (game_event['haskit'] or not gonna_blow):
+        return
+    wire_menu.send(player.index)
 
 
 @Event('bomb_defused', 'bomb_abortdefuse')

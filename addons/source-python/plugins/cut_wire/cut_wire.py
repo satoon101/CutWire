@@ -77,7 +77,7 @@ with ConfigManager(info.name) as config:
 # >> GAME EVENTS
 # =============================================================================
 @Event('bomb_begindefuse')
-def begin_defuse(game_event):
+def _begin_defuse(game_event):
     """Send a menu to the defuser."""
     # Get the defuser
     player = Player.from_userid(game_event['userid'])
@@ -98,7 +98,7 @@ def begin_defuse(game_event):
         if (bot_setting == 1 and gonna_blow) or bot_setting == 2:
 
             # Cut a wire
-            cut_chosen_wire(choice(_wire_colors), player)
+            _cut_chosen_wire(choice(_wire_colors), player)
 
         # No need to go further
         return
@@ -115,13 +115,13 @@ def begin_defuse(game_event):
 
 
 @Event('bomb_defused', 'bomb_abortdefuse')
-def close_menu(game_event):
+def _close_menu(game_event):
     """Close the menu for the defuser."""
     wire_menu.close(index_from_userid(game_event['userid']))
 
 
 @Event('bomb_exploded')
-def close_menu_all(game_event):
+def _close_menu_all(game_event):
     """Close the menu for any defusers."""
     wire_menu.close()
 
@@ -129,9 +129,9 @@ def close_menu_all(game_event):
 # =============================================================================
 # >> MENU CALLBACKS
 # =============================================================================
-def bomb_choice(menu, index, option):
+def _bomb_choice(menu, index, option):
     """Cut the chosen wire."""
-    cut_chosen_wire(option.value, Player(index))
+    _cut_chosen_wire(option.value, Player(index))
 
 
 # =============================================================================
@@ -139,7 +139,8 @@ def bomb_choice(menu, index, option):
 # =============================================================================
 # Create the wire cut menu
 wire_menu = PagedMenu(
-    description=wire_strings['Title'], select_callback=bomb_choice)
+    description=wire_strings['Title'], select_callback=_bomb_choice
+)
 
 # Loop through all choices of wire colors
 for _color in _wire_colors:
@@ -151,7 +152,7 @@ for _color in _wire_colors:
 # =============================================================================
 # >> HELPER FUNCTIONS
 # =============================================================================
-def cut_chosen_wire(chosen_wire, player):
+def _cut_chosen_wire(chosen_wire, player):
     """Cut a wire to defuse or explode the bomb."""
     # Get the bomb's instance
     bomb = Entity.find('planted_c4')

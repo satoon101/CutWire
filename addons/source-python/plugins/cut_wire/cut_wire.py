@@ -48,16 +48,29 @@ with ConfigManager(info.name) as config:
 
     # Create the send menu convar
     send_menu = config.cvar('cw_send_menu', 1, config_strings['SendMenu'])
-    for _option in [x for x in config_strings if x.startswith('MenuOption:')]:
-        send_menu.Options.append('{0} = {1}'.format(
-            _option.split(':')[1], config_strings[_option].get_string()))
+    for _option in sorted([
+        x for x in config_strings if x.startswith('MenuOption:')
+    ]):
+        send_menu.Options.append(
+            '{value} = {text}'.format(
+                value=_option.split(':')[1],
+                text=config_strings[_option].get_string()
+            )
+        )
 
     # Create the bot convar
     bot_choose_wire = config.cvar(
-        'cw_bot_choose_wire', 0, config_strings['BotChoice'])
-    for _option in [x for x in config_strings if x.startswith('BotChoice:')]:
-        bot_choose_wire.Options.append('{0} = {1}'.format(
-            _option.split(':')[1], config_strings[_option].get_string()))
+        'cw_bot_choose_wire', 0, config_strings['BotChoice']
+    )
+    for _option in sorted([
+        x for x in config_strings if x.startswith('BotChoice:')
+    ]):
+        bot_choose_wire.Options.append(
+            '{value} = {text}'.format(
+                value=_option.split(':')[1],
+                text=config_strings[_option].get_string()
+            )
+        )
 
 
 # =============================================================================

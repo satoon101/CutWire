@@ -8,6 +8,7 @@ ignore=
 # For a list of error codes, see:
 #   http://pylint-messages.wikidot.com/all-codes
 disable=
+    bad-continuation,
     import-error,
     no-name-in-module,
 

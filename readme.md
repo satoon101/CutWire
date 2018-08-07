@@ -1,24 +1,16 @@
 # CutWire
 
 ## Introduction
-CutWire is a plugin created for [Source.Python](https://github.com/Source-Python-Dev-Team/Source.Python).  As such, it requires [Source.Python](https://github.com/Source-Python-Dev-Team/Source.Python) to be installed on your CS:S or CS:GO game server.
+CutWire is a plugin created for [Source.Python](https://github.com/Source-Python-Dev-Team/Source.Python).  As such, it requires [Source.Python](https://github.com/Source-Python-Dev-Team/Source.Python) to be installed on your CS:S or CS:GO game server.  The plugin gives players the option of cutting one of four wires instead of attempting to defuse the bomb on CS:S and CS:GO.
 
-This plugin gives players the option of cutting one of four wires instead of attempting to defuse the bomb on CS:S and CS:GO.
-
-<br>
 ## Installation
-To install, simply download the current release from its [release thread](https://forums.sourcepython.com/viewtopic.php?t=779) and install it into the main directory on your server.
-
-Once you have installed CutWire on your server, simply add the following to your autoexec.cfg file:
+To install, simply download the current release from its [release thread](https://forums.sourcepython.com/viewtopic.php?t=779) and install it into the main directory on your server.  Once you have installed CutWire on your server, simply add the following to your autoexec.cfg file:
 ```
 sp plugin load cut_wire
 ```
 
-<br>
 ## Configuration
-After having loaded the plugin once, a configuration file will have been created on your server at **../cfg/source-python/cut_wire.cfg**
-
-Edit that file to your liking.  The current default configuration file looks like:
+After having loaded the plugin once, a configuration file will have been created on your server at **../cfg/source-python/cut_wire.cfg**  Edit that file to your liking.  The current default configuration file looks like:
 ```
 // Options
 //   * 1 = Always send the defuser a menu.
@@ -38,36 +30,29 @@ Edit that file to your liking.  The current default configuration file looks lik
    cw_bot_choose_wire 0
 ```
 
-<br>
 ## Screenshots
 The following are screenshots of the menu and messages that accompany this plugin:
 
-<br>
 **CS:GO Menu:**
 
 ![CSGO Menu](https://raw.githubusercontent.com/satoon101/CutWire/screenshots/csgo_menu.png "CS:GO Menu")
 
-<br>
 **CS:GO cut correct wire:**
 
 ![CSGO Correct](https://raw.githubusercontent.com/satoon101/CutWire/screenshots/csgo_correct_wire.png "CS:GO Correct")
 
-<br>
 **CS:GO cut wrong wire:**
 
 ![CSGO Wrong](https://raw.githubusercontent.com/satoon101/CutWire/screenshots/csgo_wrong_wire.png "CS:GO Wrong")
 
-<br>
 **CS:S Menu:**
 
 ![CSS Menu](https://raw.githubusercontent.com/satoon101/CutWire/screenshots/css_menu.png "CS:S Menu")
 
-<br>
 **CS:S cut correct wire:**
 
 ![CSS Correct](https://raw.githubusercontent.com/satoon101/CutWire/screenshots/css_correct_wire.png "CS:S Correct")
 
-<br>
 **CS:S cut wrong wire:**
 
 ![CSS Wrong](https://raw.githubusercontent.com/satoon101/CutWire/screenshots/css_wrong_wire.png "CS:S Wrong")

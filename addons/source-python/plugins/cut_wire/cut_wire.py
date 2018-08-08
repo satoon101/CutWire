@@ -9,7 +9,6 @@
 from random import choice
 
 # Source.Python
-from config.manager import ConfigManager
 from entities.entity import Entity
 from events import Event
 from menus import PagedMenu
@@ -17,60 +16,21 @@ from menus import PagedOption
 from messages import SayText2
 from players.entity import Player
 from players.helpers import index_from_userid
-from translations.strings import LangStrings
 
 # Plugin
-from cut_wire.info import info
+from .config import bot_choose_wire, send_menu
+from .strings import MESSAGE_STRINGS
 
 
 # =============================================================================
 # >> GLOBAL VARIABLES
 # =============================================================================
-# Get the in-game strings to use
-wire_strings = LangStrings(info.name + '/strings')
-
-# Get the config strings to use
-config_strings = LangStrings(info.name + '/config_strings')
-
 # Store the wire color choices
-_wire_colors = tuple(x for x in wire_strings if x.startswith('Color:'))
+_wire_colors = tuple(x for x in MESSAGE_STRINGS if x.startswith('Color:'))
 
 # Store the defused/exploded messages
-defused_message = SayText2(message=wire_strings['Defused'])
-exploded_message = SayText2(message=wire_strings['Exploded'])
-
-
-# =============================================================================
-# >> CONFIGURATION
-# =============================================================================
-# Create the config file
-with ConfigManager(info.name) as config:
-
-    # Create the send menu convar
-    send_menu = config.cvar('cw_send_menu', 1, config_strings['SendMenu'])
-    for _option in sorted([
-        x for x in config_strings if x.startswith('MenuOption:')
-    ]):
-        send_menu.Options.append(
-            '{value} = {text}'.format(
-                value=_option.split(':')[1],
-                text=config_strings[_option].get_string()
-            )
-        )
-
-    # Create the bot convar
-    bot_choose_wire = config.cvar(
-        'cw_bot_choose_wire', 0, config_strings['BotChoice']
-    )
-    for _option in sorted([
-        x for x in config_strings if x.startswith('BotChoice:')
-    ]):
-        bot_choose_wire.Options.append(
-            '{value} = {text}'.format(
-                value=_option.split(':')[1],
-                text=config_strings[_option].get_string()
-            )
-        )
+DEFUSED_MESSAGE = SayText2(message=MESSAGE_STRINGS['Defused'])
+EXPLODED_MESSAGE = SayText2(message=MESSAGE_STRINGS['Exploded'])
 
 
 # =============================================================================
@@ -139,14 +99,14 @@ def _bomb_choice(menu, index, option):
 # =============================================================================
 # Create the wire cut menu
 wire_menu = PagedMenu(
-    description=wire_strings['Title'], select_callback=_bomb_choice
+    description=MESSAGE_STRINGS['Title'], select_callback=_bomb_choice
 )
 
 # Loop through all choices of wire colors
 for _color in _wire_colors:
 
     # Add the color to the menu
-    wire_menu.append(PagedOption(wire_strings[_color], _color))
+    wire_menu.append(PagedOption(MESSAGE_STRINGS[_color], _color))
 
 
 # =============================================================================
@@ -165,8 +125,8 @@ def _cut_chosen_wire(chosen_wire, player):
         bomb.defuse_count_down = 1.0
 
         # Tell the server that the player cut the correct wire
-        defused_message.index = player.index
-        defused_message.send(name=player.name)
+        DEFUSED_MESSAGE.index = player.index
+        DEFUSED_MESSAGE.send(name=player.name)
 
     # Did the defuser choose one of the wrong wires?
     else:
@@ -176,5 +136,5 @@ def _cut_chosen_wire(chosen_wire, player):
         bomb.c4_blow = 1.0
 
         # Tell the server that the player cut the wrong wire
-        exploded_message.index = player.index
-        exploded_message.send(name=player.name)
+        EXPLODED_MESSAGE.index = player.index
+        EXPLODED_MESSAGE.send(name=player.name)

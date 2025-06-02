@@ -46,7 +46,7 @@ def _begin_defuse(game_event):
     # Is the defuser a bot?
     if player.is_fake_client():
         # Should the bot cut a wire?
-        bot_setting = bot_choose_wire.get_int()
+        bot_setting = int(bot_choose_wire)
         if (
             (bot_setting == BotChooseWire.IF_NO_TIME and gonna_blow) or
             bot_setting == BotChooseWire.ALWAYS
@@ -55,7 +55,7 @@ def _begin_defuse(game_event):
         return
 
     # Send the wire cut menu to the defuser
-    send_setting = send_menu.get_int()
+    send_setting = int(send_menu)
     if send_setting == SendMenu.NO_TIME_TO_DEFUSE and not gonna_blow:
         return
     if (
